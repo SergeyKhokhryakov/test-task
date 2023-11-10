@@ -1,113 +1,65 @@
 package ru.ostrovcy.qademo;
 
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.logevents.SelenideLogger;
-import io.qameta.allure.selenide.AllureSelenide;
-import org.junit.jupiter.api.BeforeAll;
+import io.qameta.allure.*;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.Alert;
+import ru.ostrovcy.qademo.pages.TestBase;
 
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-/**
- * Using Faker library
- * Using Datafaker library
- */
+public class TaskTest extends TestBase {
 
-public class TaskTest {
-  String userName = "Петров Иван Сергеевич";
-  String userEmail = "test@gmail.com";
-  String currentAddress = "134009 Москва, ул. Ватутина, д.1";
-  String permanentAddress = "100203 Москва, ул. Новые Черемушки, д.125, кв. 99";
   String promptText = "Test name";
 
-  @BeforeAll
-  public static void init() {
-    Configuration.browserSize = "1920x1080";
-    Configuration.baseUrl = "https://demoqa.com";
-    Configuration.pageLoadTimeout = 60000; // очень долго грузиться любой браузер!!!!
-    SelenideLogger.addListener(" Allure", new AllureSelenide());
-  }
 
   @Test
+  @Owner("Хохряков Сергей")
+  @Feature("\"Elements\", \"Alerts, Frame & Windows\"")
+  @Story("Элементы на странице demoqa.com")
+  @Severity(SeverityLevel.NORMAL)
+  @DisplayName("Тест: Шаги с аннотацией @Step")
+
   public void test() {
-    open("/");
-//      assertThat(1).isEqualTo(1);
+    startPage.open();
+
+    textBoxPage.open()
+            .inputFields(data.getUserName(), data.getUserEmail(), data.getCurrentAddress(), data.getPermanentAddress())
+            .sendForm();
+    textBoxPage.verifyBlockResult(data.getUserName(), data.getUserEmail(), data.getCurrentAddress(), data.getPermanentAddress());
 
 
-    $x("//h5[text()='Elements']").click();
-    $(".element-list.collapse.show").$(byText("Text Box")).click();
-    $("input#userName").setValue(userName);
-    $("input#userEmail").setValue(userEmail);
-    $("textarea#currentAddress").setValue(currentAddress);
-    $("textarea#permanentAddress").setValue(permanentAddress);
-    $x("//button[text()='Submit']").click();
-    SelenideElement response = $("#output");
-    response.should(appear);
-    response.$("#name").shouldHave(text(userName));
-    response.$("#email").shouldHave(text(userEmail));
-    response.$("#currentAddress").shouldHave(text(currentAddress));
-    response.$("#permanentAddress").shouldHave(text(permanentAddress));
+    buttonsPage.open().click();
+    buttonsPage.verifyClickResult("You have done a dynamic click");
+    buttonsPage.contextClick();
+    buttonsPage.verifyContextClickResult("You have done a right click");
+    buttonsPage.doubleClick();
+    buttonsPage.verifyDoubleClickResult("You have done a double click");
 
-
-    $(".element-list.collapse.show").$(byText("Buttons")).click();
-    $x("//button[text()='Click Me']").click();
-    $("#dynamicClickMessage").should(appear).shouldHave(text("You have done a dynamic click"));
-
-    $("button#rightClickBtn").contextClick();
-    $("#rightClickMessage").should(appear).shouldHave(text("You have done a right click"));
-
-    $("button#doubleClickBtn").doubleClick();
-    $("#doubleClickMessage").should(appear).shouldHave(text("You have done a double click"));
     $x("//div[text()='Elements']").click();
 
 
-    $x("//div[text()='Alerts, Frame & Windows']").click();
-    $(".element-list.collapse.show").$(byText("Browser Windows")).click();
-    $("#tabButton").click();
-//    Set<String> windowHandles = getWebDriver().getWindowHandles();
-//    String windowHandle = getWebDriver().getWindowHandle();
-    Selenide.switchTo().window(1);
-    Selenide.closeWindow();
-    Selenide.switchTo().window(0);
+    browserWindowsPage.open()
+            .openNewTab()
+            .closeNewTab();
 
-    $("#windowButton").click();
-    Selenide.switchTo().window(1);
-    Selenide.closeWindow();
-    Selenide.switchTo().window(0);
+    browserWindowsPage.openNewWindow()
+            .closeNewWindow();
 
-    $(".element-list.collapse.show").$(byText("Alerts")).click();
-    $("button#alertButton").click();
-    Selenide.switchTo().alert().accept();
+    alertsPage.open()
+            .showAlert()
+            .closeModal();
 
-    $("button#timerAlertButton").click();
-    Configuration.timeout = 6000; // alert will appear after 5 seconds
-    Selenide.switchTo().alert().accept();
-    Configuration.timeout = 4000; // set default value
+    alertsPage.showAlertTimer()
+            .closeModalTimer();
 
-    $("button#confirmButton").click();
-    Selenide.switchTo().alert().accept();
-    String green = "rgba(40, 167, 69, 1)"; // для chrome
-    $("#confirmResult")
-            .should(appear)
-            .shouldHave(text("You selected \nOk"))
-            .shouldHave(cssValue("color", green));
+    alertsPage.showConfirmBox()
+            .confirmModal();
+    alertsPage.verifyConfirmResult("You selected \nOk");
 
-    $("button#promtButton").click();
-    Alert alert = switchTo().alert();
-    alert.sendKeys(promptText);
-    alert.accept();
-    $("#promptResult")
-            .should(appear)
-            .shouldHave(text("You entered \n" + promptText))
-            .shouldHave(cssValue("color", green));
-
-    System.out.println();
-
-
+    alertsPage.showPromptBox()
+                    .input(promptText);
+    alertsPage.verifyPromptResult(promptText);
   }
+
+
 }
