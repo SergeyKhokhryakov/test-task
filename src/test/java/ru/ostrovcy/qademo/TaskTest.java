@@ -14,26 +14,27 @@ public class TaskTest extends TestBase {
 
   @Test
   @Owner("Хохряков Сергей")
-  @Feature("\"Elements\", \"Alerts, Frame & Windows\"")
+  @Feature("Фичи: \"Elements\", \"Alerts, Frame & Windows\"")
   @Story("Элементы на странице demoqa.com")
   @Severity(SeverityLevel.NORMAL)
-  @DisplayName("Тест: Шаги с аннотацией @Step")
+  @DisplayName("Позитивный тест: Шаги с аннотацией @Step")
 
   public void test() {
     startPage.open();
 
     textBoxPage.open()
             .inputFields(data.getUserName(), data.getUserEmail(), data.getCurrentAddress(), data.getPermanentAddress())
-            .sendForm();
-    textBoxPage.verifyBlockResult(data.getUserName(), data.getUserEmail(), data.getCurrentAddress(), data.getPermanentAddress());
+            .sendForm()
+            .verifyBlockResult(data.getUserName(), data.getUserEmail(), data.getCurrentAddress(), data.getPermanentAddress());
 
 
-    buttonsPage.open().click();
-    buttonsPage.verifyClickResult("You have done a dynamic click");
-    buttonsPage.contextClick();
-    buttonsPage.verifyContextClickResult("You have done a right click");
-    buttonsPage.doubleClick();
-    buttonsPage.verifyDoubleClickResult("You have done a double click");
+    buttonsPage.open()
+            .click()
+            .verifyClickResult("You have done a dynamic click")
+            .contextClick()
+            .verifyContextClickResult("You have done a right click")
+            .doubleClick()
+            .verifyDoubleClickResult("You have done a double click");
 
     $x("//div[text()='Elements']").click();
 
@@ -57,7 +58,7 @@ public class TaskTest extends TestBase {
     alertsPage.verifyConfirmResult("You selected \nOk");
 
     alertsPage.showPromptBox()
-                    .input(promptText);
+            .input(promptText);
     alertsPage.verifyPromptResult(promptText);
   }
 

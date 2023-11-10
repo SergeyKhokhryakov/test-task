@@ -22,28 +22,33 @@ public class ButtonsPage {
   }
 
   @Step("8.\tНажать на кнопку «Click me»")
-  public void click() {
+  public ButtonsPage click() {
     $x("//button[text()='Click Me']").click();
+    return this;
   }
 
   @Step("10.\tНажать на кнопку «Right Click me»")
-  public void contextClick(){
+  public ButtonsPage contextClick(){
     $("button#rightClickBtn").contextClick();
+    return this;
   }
 
   @Step("12.\tНажать на кнопку «Double Click me»")
-  public void doubleClick(){
+  public ButtonsPage doubleClick(){
     $("button#doubleClickBtn").doubleClick();
+    return this;
   }
 
   @Step("9.\tПроверить, что появился текст «You have done a dynamic click»")
-  public void verifyClickResult(String value) {
+  public ButtonsPage verifyClickResult(String value) {
     verifyResult("#dynamicClickMessage", value);
+    return this;
   }
 
   @Step("11.\tПроверить, что появился текст «You have done a right click»")
-  public void verifyContextClickResult(String value) {
+  public ButtonsPage verifyContextClickResult(String value) {
     verifyResult("#rightClickMessage", value);
+    return this;
   }
 
   @Step("13.\tПроверить, что появился текст «You have done a double click»")

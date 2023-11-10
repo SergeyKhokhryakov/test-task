@@ -63,8 +63,9 @@ public class TextBoxPage {
   }
 
   @Step("5.\tНажать на кнопку «Submit»")
-  public void sendForm(){
+  public TextBoxPage sendForm(){
     $("#submit").click();
+    return this;
   }
 
   @Step("6.\tПроверить, что данные в блоке сохранены корректно")
