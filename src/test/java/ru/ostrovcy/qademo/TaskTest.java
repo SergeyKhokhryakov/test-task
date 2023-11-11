@@ -12,9 +12,10 @@ public class TaskTest extends TestBase {
 
   @Test
   @Owner("Хохряков Сергей")
+  @Description("Данный тест разработан в соотвествии с тестовым заданием")
   @Feature("Фичи: \"Elements\", \"Alerts, Frame & Windows\"")
   @Story("Элементы на странице demoqa.com")
-  @Severity(SeverityLevel.NORMAL)
+  @Severity(SeverityLevel.CRITICAL)
   @DisplayName("Позитивный тест: Шаги с аннотацией @Step")
 
   public void test() {

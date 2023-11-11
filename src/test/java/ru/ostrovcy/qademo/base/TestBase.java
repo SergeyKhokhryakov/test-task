@@ -10,6 +10,7 @@ import ru.ostrovcy.qademo.navigation.StartPage;
 public class TestBase {
   protected StartPage startPage = new StartPage();
   protected MainPage mainPage = MainPage.getInstance();
+
   protected TestData data = new TestData();
 
   @BeforeAll

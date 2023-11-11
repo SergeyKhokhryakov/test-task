@@ -1,39 +1,30 @@
 package ru.ostrovcy.qademo.pages;
 
 import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
 
 public class BrowserWindowsPage {
 
-  SelenideElement rubrics = $(".element-list.collapse.show");
-
-  public void open(String locator){
-    rubrics.$(byText(locator)).click();
-  }
-
-  @Step("16.\tНажать на кнопку «New Tab»")
+  @Step("16. Нажать на кнопку «New Tab»")
   public BrowserWindowsPage openNewTab(){
     $("#tabButton").click();
     return this;
   }
 
-  @Step("17.\tЗакрыть новую вкладку")
+  @Step("17. Закрыть новую вкладку")
   public void closeNewTab(){
     close();
   }
 
-  @Step("18.\tНажать на кнопку «New window»")
+  @Step("18. Нажать на кнопку «New window»")
   public BrowserWindowsPage openNewWindow(){
     $("#windowButton").click();
     return this;
   }
 
-  @Step("19.\t Закрыть новое окно")
+  @Step("19. Закрыть новое окно")
   public void closeNewWindow(){
     close();
   }

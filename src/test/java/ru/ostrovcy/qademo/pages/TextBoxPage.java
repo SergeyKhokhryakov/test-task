@@ -5,15 +5,13 @@ import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
 
 public class TextBoxPage {
 
   SelenideElement response = $("#output");
 
-  @Step("4.\tЗаполнить поля: Full Name, Email, Current Address, Permanent Address")
+  @Step("4. Заполнить поля: Full Name, Email, Current Address, Permanent Address")
   public TextBoxPage inputFields(String name, String email, String currentAddress, String permanentAddress){
     setUserName(name);
     setUserEmail(email);
@@ -42,13 +40,13 @@ public class TextBoxPage {
     return this;
   }
 
-  @Step("5.\tНажать на кнопку «Submit»")
+  @Step("5. Нажать на кнопку «Submit»")
   public TextBoxPage sendForm(){
     $("#submit").click();
     return this;
   }
 
-  @Step("6.\tПроверить, что данные в блоке сохранены корректно")
+  @Step("6. Проверить, что данные в блоке сохранены корректно")
   public void verifyBlockResult(String name, String email, String currentAddress, String permanentAddress){
     verifyModalAppears();
     verifyResult("name", name);

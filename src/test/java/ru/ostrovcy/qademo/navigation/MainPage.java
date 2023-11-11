@@ -64,35 +64,35 @@ public final class MainPage {
     return getInstance();
   }
 
-  @Step("14.\tНажать на «Alerts, Frame & Windows»")
+  @Step("14. Нажать на «Alerts, Frame & Windows»")
   public MainPage openAlertsFrameWindowsCategory() {
     scrollTo(locatorAlertsFrameWindows);
     openCategory(locatorAlertsFrameWindows);
     return getInstance();
   }
 
-  @Step("3.\tНажать на «Text box»")
+  @Step("3. Нажать на «Text box»")
   public TextBoxPage openTextBoxPage() {
     open("Text Box");
     hideBanners();
     return textBoxPage;
   }
 
-  @Step("7.\tНажать на «Buttons»")
+  @Step("7. Нажать на «Buttons»")
   public ButtonsPage openButtonsPage() {
     open("Buttons");
     hideBanners();
     return buttonsPage;
   }
 
-  @Step("15.\tНажать на «Browser Windows»")
+  @Step("15. Нажать на «Browser Windows»")
   public BrowserWindowsPage openBrowserWindowsPage() {
     open("Browser Windows");
     hideBanners();
     return browserWindowsPage;
   }
 
-  @Step("20.\tНажать на «Alerts»")
+  @Step("20. Нажать на «Alerts»")
   public AlertsPage openAlertPage() {
     open("Alerts");
     hideBanners();

@@ -18,13 +18,13 @@ import static com.codeborne.selenide.Selenide.$x;
  * Методы:
  *   - goToElementsCategory()
  *   - goToAlertsFrameWindowsCategory()
- *
+ *   - по остальным категориям методы дополняются по мере реализации проекта
  */
 public class StartPage {
   private String locatorElements = "//h5[text()='Elements']";
   private String locatorAlertsFrameWindows = "//h5[text()='Alerts, Frame & Windows']";
 
-  @Step("1.\tПерейти на https://demoqa.com/")
+  @Step("1. Перейти на https://demoqa.com/")
   public StartPage open() {
     Selenide.open("/");
     return this;
