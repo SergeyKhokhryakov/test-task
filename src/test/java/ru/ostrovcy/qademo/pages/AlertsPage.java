@@ -10,6 +10,8 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.switchTo;
 
 public class AlertsPage {
+  long defaultTimeout = 4000;
+  long alertTimeout = 6000;
 
   String green = "rgba(40, 167, 69, 1)"; // для chrome
 
@@ -32,9 +34,9 @@ public class AlertsPage {
 
   @Step("24. Закрыть уведомление")
   public void closeModalTimer(){
-    Configuration.timeout = 6000; // alert will appear after 5 seconds
+    Configuration.timeout = alertTimeout; // alert will appear after 5 seconds
     Selenide.switchTo().alert().accept();
-    Configuration.timeout = 4000; // set default value
+    Configuration.timeout = defaultTimeout; // set default value
   }
 
   @Step("25. Нажать на кнопку «Click me»  рядом с On button click, confirm box will appear")

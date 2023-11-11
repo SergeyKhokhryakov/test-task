@@ -9,7 +9,6 @@ public class TaskTest extends TestBase {
 
   String promptText = "Test name";
 
-
   @Test
   @Owner("Хохряков Сергей")
   @Description("Данный тест разработан в соотвествии с тестовым заданием")
