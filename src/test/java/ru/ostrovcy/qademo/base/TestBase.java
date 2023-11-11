@@ -1,9 +1,11 @@
-package ru.ostrovcy.qademo.pages;
+package ru.ostrovcy.qademo.base;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.BeforeAll;
+import ru.ostrovcy.qademo.navigation.MainPage;
+import ru.ostrovcy.qademo.navigation.StartPage;
 
 public class TestBase {
   protected StartPage startPage = new StartPage();

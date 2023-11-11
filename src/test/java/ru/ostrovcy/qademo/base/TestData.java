@@ -1,4 +1,4 @@
-package ru.ostrovcy.qademo.pages;
+package ru.ostrovcy.qademo.base;
 
 import lombok.Getter;
 import net.datafaker.Faker;

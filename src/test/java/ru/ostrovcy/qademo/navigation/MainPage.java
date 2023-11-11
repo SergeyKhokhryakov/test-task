@@ -1,8 +1,12 @@
-package ru.ostrovcy.qademo.pages;
+package ru.ostrovcy.qademo.navigation;
 
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+import ru.ostrovcy.qademo.pages.AlertsPage;
+import ru.ostrovcy.qademo.pages.BrowserWindowsPage;
+import ru.ostrovcy.qademo.pages.ButtonsPage;
+import ru.ostrovcy.qademo.pages.TextBoxPage;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;

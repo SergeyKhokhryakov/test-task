@@ -1,4 +1,4 @@
-package ru.ostrovcy.qademo.pages;
+package ru.ostrovcy.qademo.navigation;
 
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Step;
