@@ -6,12 +6,8 @@ import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.BeforeAll;
 
 public class TestBase {
-  protected MainPage startPage = new MainPage();
-  protected TextBoxPage textBoxPage = new TextBoxPage();
-  protected ButtonsPage buttonsPage = new ButtonsPage();
-  protected BrowserWindowsPage browserWindowsPage = new BrowserWindowsPage();
-  protected AlertsPage alertsPage = new AlertsPage();
-  protected MainPage mainPage = startPage;
+  protected StartPage startPage = new StartPage();
+  protected MainPage mainPage = MainPage.getInstance();
   protected TestData data = new TestData();
 
   @BeforeAll

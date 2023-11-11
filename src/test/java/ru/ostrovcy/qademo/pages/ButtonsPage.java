@@ -10,16 +10,6 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class ButtonsPage {
-  SelenideElement rubrics = $(".element-list.collapse.show");
-
-  @Step("7.\tНажать на «Buttons»")
-  public ButtonsPage open() {
-    open("Buttons");
-    return this;
-  }
-  public void open(String locator){
-    rubrics.$(byText(locator)).click();
-  }
 
   @Step("8.\tНажать на кнопку «Click me»")
   public ButtonsPage click() {

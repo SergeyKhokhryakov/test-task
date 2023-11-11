@@ -12,18 +12,8 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.switchTo;
 
 public class AlertsPage {
-  SelenideElement rubrics = $(".element-list.collapse.show");
+
   String green = "rgba(40, 167, 69, 1)"; // для chrome
-
-  @Step("20.\tНажать на «Alerts»")
-  public AlertsPage open() {
-    open("Alerts");
-    return this;
-  }
-
-  public void open(String locator) {
-    rubrics.$(byText(locator)).click();
-  }
 
   @Step("21.\tНажать на кнопку «Click me»  рядом с Click Button to see alert")
   public AlertsPage showAlert(){
@@ -56,8 +46,9 @@ public class AlertsPage {
   }
 
   @Step("26.\tНажать на кнопку «Да» в уведомление")
-  public void confirmModal(){
+  public AlertsPage confirmModal(){
     Selenide.switchTo().alert().accept();
+    return this;
   }
 
   @Step("27.\tПроверить, что появился текст You selected Ok")
@@ -72,10 +63,11 @@ public class AlertsPage {
   }
 
   @Step("29.\tЗаполнить поле в уведомление данными: Test name")
-  public void input(String value){
+  public AlertsPage input(String value){
     Alert alert = switchTo().alert();
     alert.sendKeys(value);
     alert.accept();
+    return this;
   }
 
   @Step("30.\tПроверить, что появился текст You entered Test name")

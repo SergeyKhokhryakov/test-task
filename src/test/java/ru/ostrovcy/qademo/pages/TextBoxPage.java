@@ -10,28 +10,8 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class TextBoxPage {
-  private String locatorElements = "//h5[text()='Elements']";
-  SelenideElement rubrics = $(".element-list.collapse.show");
+
   SelenideElement response = $("#output");
-
-  @Step("2.	Нажать на «Elements»")
-  public TextBoxPage goToElements() {
-    goToCategory(locatorElements);
-    return this;
-  }
-
-  public void goToCategory(String locator) {
-    $x(locator).click();
-  }
-
-  @Step("3.\tНажать на «Text box»")
-  public TextBoxPage open() {
-      goToElements().open("Text Box");
-    return this;
-  }
-  public void open(String locator){
-    rubrics.$(byText(locator)).click();
-  }
 
   @Step("4.\tЗаполнить поля: Full Name, Email, Current Address, Permanent Address")
   public TextBoxPage inputFields(String name, String email, String currentAddress, String permanentAddress){
@@ -86,7 +66,5 @@ public class TextBoxPage {
     response.should(appear);
     return this;
   }
-
-
 
 }

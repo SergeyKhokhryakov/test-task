@@ -9,24 +9,9 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class BrowserWindowsPage {
-  private String locatorAlertsFrameWindows = "//div[text()='Alerts, Frame & Windows']";
+
   SelenideElement rubrics = $(".element-list.collapse.show");
 
-  @Step("14.\tНажать на «Alerts, Frame & Windows»")
-  public BrowserWindowsPage goToAlertsFrameWindows() {
-    goToCategory(locatorAlertsFrameWindows);
-    return this;
-  }
-
-  public void goToCategory(String locator) {
-    $x(locator).click();
-  }
-
-  @Step("15.\tНажать на «Browser Windows»")
-  public BrowserWindowsPage open() {
-    goToAlertsFrameWindows().open("Browser Windows");
-    return this;
-  }
   public void open(String locator){
     rubrics.$(byText(locator)).click();
   }
@@ -58,4 +43,5 @@ public class BrowserWindowsPage {
     Selenide.closeWindow();
     Selenide.switchTo().window(0);
   }
+
 }

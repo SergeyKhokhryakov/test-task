@@ -1,62 +1,107 @@
 package ru.ostrovcy.qademo.pages;
 
-import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
-import ru.ostrovcy.qademo.components.Category;
-import ru.ostrovcy.qademo.components.Navigation;
 
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
-public class MainPage {
-//  private String locatorElements = "//h5[text()='Elements']";
-//  private String locatorAlertsFrameWindows = "//div[text()='Alerts, Frame & Windows']";
-  private Category category = new Category();
-  private Navigation menu = new Navigation();
+/**
+ * Главная страница приложения (для отработки практики)
+ * Имеет левую панель навигации по категориям
+ * В каждой категории сгруппированы родственные веб-элементы
+ *
+ * Методы:
+ * - раскрыть категорию (expand)/свернуть категорию (collapse)
+ */
+
+
+public final class MainPage {
+  private static volatile MainPage instance;
+  private String locatorElements = "//div[text()='Elements']";
+  private String locatorAlertsFrameWindows = "//div[text()='Alerts, Frame & Windows']";
+  private SelenideElement rubrics = $(".element-list.collapse.show");
   private TextBoxPage textBoxPage = new TextBoxPage();
+  private ButtonsPage buttonsPage = new ButtonsPage();
+  private AlertsPage alertsPage = new AlertsPage();
 
-  @Step("1.\tПерейти на https://demoqa.com/")
-  public MainPage open() {
-    Selenide.open("/");
-    return this;
+  private BrowserWindowsPage browserWindowsPage = new BrowserWindowsPage();
+
+  private MainPage() {
   }
 
-  public MainPage goToElements() {
-    goToCategory(menu.toElements());
-    return this;
+  public static MainPage getInstance() {
+    MainPage result = instance;
+    if (result != null) {
+      return result;
+    }
+    synchronized (MainPage.class) {
+      if (instance == null) {
+        instance = new MainPage();
+      }
+      return instance;
+    }
   }
 
-  public MainPage goToAlertsFrameWindows() {
-    goToCategory(menu.toAlertsFrameWindows());
-    return this;
+  public MainPage openElements() {
+    openCategory(locatorElements);
+    return getInstance();
   }
 
-  public void goToCategory(String locator) {
+  @Step("14.\tНажать на «Alerts, Frame & Windows»")
+  public MainPage openAlertsFrameWindows() {
+    openCategory(locatorAlertsFrameWindows);
+    return getInstance();
+  }
+
+  @Step("3.\tНажать на «Text box»")
+  public TextBoxPage openTextBoxPage() {
+    open("Text Box");
+    return textBoxPage;
+  }
+
+  @Step("7.\tНажать на «Buttons»")
+  public ButtonsPage openButtonsPage() {
+    open("Buttons");
+    return buttonsPage;
+  }
+
+  @Step("15.\tНажать на «Browser Windows»")
+  public BrowserWindowsPage openBrowserWindowsPage() {
+    open("Browser Windows");
+    return browserWindowsPage;
+  }
+
+  @Step("20.\tНажать на «Alerts»")
+  public AlertsPage openAlertPage() {
+    open("Alerts");
+    return alertsPage;
+  }
+
+  private void openCategory(String locator) {
     $x(locator).click();
   }
 
-
-  public MainPage openButtonsPage() {
-    category.openButtons();
-    return this;
-  }
-  public MainPage openBrowserWindowsPage() {
-    category.openBrowserWindows();
-    return this;
-  }
-  public MainPage openAlertsPage() {
-    category.openAlerts();
-    return this;
+  private void open(String locator) {
+    rubrics.$(byText(locator)).click();
   }
 
-
-  public MainPage goToRubric(String locator) {
-    return this;
-
-  }
-  public void open(String locator){
-    menu.toRubrics().$(byText(locator)).click();
+  public TextBoxPage onTextBoxPage() {
+    return textBoxPage;
   }
 
+  public ButtonsPage onButtonsPage() {
+    return buttonsPage;
+  }
+
+  public BrowserWindowsPage onBrowserWindowsPage() {
+    return browserWindowsPage;
+  }
+
+  public AlertsPage onAlertsPage() {
+    return alertsPage;
+  }
 
 }
+
