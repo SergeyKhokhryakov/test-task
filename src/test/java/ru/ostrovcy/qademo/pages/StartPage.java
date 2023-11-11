@@ -16,8 +16,8 @@ import static com.codeborne.selenide.Selenide.$x;
  * 6. Book Store Application
  *
  * Методы:
- *   - goToElements()
- *   - goToAlertsFrameWindows()
+ *   - goToElementsCategory()
+ *   - goToAlertsFrameWindowsCategory()
  *
  */
 public class StartPage {
@@ -31,12 +31,12 @@ public class StartPage {
   }
 
   @Step("2.	Нажать на «Elements»")
-  public MainPage goToElements() {
+  public MainPage goToElementsCategory() {
     goToCategory(locatorElements);
     return MainPage.getInstance();
   }
 
-  public MainPage goToAlertsFrameWindows() {
+  public MainPage goToAlertsFrameWindowsCategory() {
     goToCategory(locatorAlertsFrameWindows);
     return MainPage.getInstance();
   }

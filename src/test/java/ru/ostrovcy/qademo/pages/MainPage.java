@@ -2,18 +2,27 @@ package ru.ostrovcy.qademo.pages;
 
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.*;
 
 /**
  * Главная страница приложения (для отработки практики)
  * Имеет левую панель навигации по категориям
  * В каждой категории сгруппированы родственные веб-элементы
- *
+ * <p>
  * Методы:
- * - раскрыть категорию (expand)/свернуть категорию (collapse)
+ * - openElementsCategory()
+ * - openAlertsFrameWindowsCategory()
+ * - openTextBoxPage()
+ * - openButtonsPage()
+ * - openBrowserWindowsPage()
+ * - openAlertPage()
+ * - onTextBoxPage()
+ * - onButtonsPage()
+ * - onBrowserWindowsPage()
+ * - onAlertPage()
  */
 
 
@@ -21,12 +30,13 @@ public final class MainPage {
   private static volatile MainPage instance;
   private String locatorElements = "//div[text()='Elements']";
   private String locatorAlertsFrameWindows = "//div[text()='Alerts, Frame & Windows']";
+//  private String locatorElements = "Elements";
+//  private String locatorAlertsFrameWindows = "Alerts, Frame & Windows";
   private SelenideElement rubrics = $(".element-list.collapse.show");
   private TextBoxPage textBoxPage = new TextBoxPage();
   private ButtonsPage buttonsPage = new ButtonsPage();
-  private AlertsPage alertsPage = new AlertsPage();
-
   private BrowserWindowsPage browserWindowsPage = new BrowserWindowsPage();
+  private AlertsPage alertsPage = new AlertsPage();
 
   private MainPage() {
   }
@@ -44,13 +54,15 @@ public final class MainPage {
     }
   }
 
-  public MainPage openElements() {
+  public MainPage openElementsCategory() {
+    scrollTo(locatorElements);
     openCategory(locatorElements);
     return getInstance();
   }
 
   @Step("14.\tНажать на «Alerts, Frame & Windows»")
-  public MainPage openAlertsFrameWindows() {
+  public MainPage openAlertsFrameWindowsCategory() {
+    scrollTo(locatorAlertsFrameWindows);
     openCategory(locatorAlertsFrameWindows);
     return getInstance();
   }
@@ -58,24 +70,28 @@ public final class MainPage {
   @Step("3.\tНажать на «Text box»")
   public TextBoxPage openTextBoxPage() {
     open("Text Box");
+    hideBanners();
     return textBoxPage;
   }
 
   @Step("7.\tНажать на «Buttons»")
   public ButtonsPage openButtonsPage() {
     open("Buttons");
+    hideBanners();
     return buttonsPage;
   }
 
   @Step("15.\tНажать на «Browser Windows»")
   public BrowserWindowsPage openBrowserWindowsPage() {
     open("Browser Windows");
+    hideBanners();
     return browserWindowsPage;
   }
 
   @Step("20.\tНажать на «Alerts»")
   public AlertsPage openAlertPage() {
     open("Alerts");
+    hideBanners();
     return alertsPage;
   }
 
@@ -101,6 +117,17 @@ public final class MainPage {
 
   public AlertsPage onAlertsPage() {
     return alertsPage;
+  }
+
+  private void scrollTo(String locator) {
+//    $(byText(locator)).scrollTo();
+    $(By.xpath(locator)).scrollTo();
+  }
+
+  //hide overlay banners
+  private void hideBanners(){
+    executeJavaScript("$('footer').remove()");
+    executeJavaScript("$('#fixedban').remove()");
   }
 
 }

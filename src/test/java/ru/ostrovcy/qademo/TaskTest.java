@@ -5,8 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.ostrovcy.qademo.pages.TestBase;
 
-import static com.codeborne.selenide.Selenide.*;
-
 public class TaskTest extends TestBase {
 
   String promptText = "Test name";
@@ -21,7 +19,7 @@ public class TaskTest extends TestBase {
 
   public void test() {
     startPage.open()
-            .goToElements()
+            .goToElementsCategory()
             .openTextBoxPage()
             .inputFields(data.getUserName(), data.getUserEmail(), data.getCurrentAddress(), data.getPermanentAddress())
             .sendForm()
@@ -35,9 +33,7 @@ public class TaskTest extends TestBase {
             .doubleClick()
             .verifyDoubleClickResult("You have done a double click");
 
-    $x("//div[text()='Elements']").click();
-
-    mainPage.openAlertsFrameWindows()
+    mainPage.openAlertsFrameWindowsCategory()
             .openBrowserWindowsPage()
             .openNewTab()
             .closeNewTab();
@@ -64,6 +60,5 @@ public class TaskTest extends TestBase {
             .input(promptText)
             .verifyPromptResult(promptText);
   }
-
 
 }
