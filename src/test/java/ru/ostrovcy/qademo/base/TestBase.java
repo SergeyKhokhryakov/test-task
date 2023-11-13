@@ -10,14 +10,16 @@ import ru.ostrovcy.qademo.navigation.StartPage;
 public class TestBase {
   protected StartPage startPage = new StartPage();
   protected MainPage mainPage = MainPage.getInstance();
-
   protected TestData data = new TestData();
+  private final static String BASE_URL = "https://demoqa.com";
 
   @BeforeAll
   static void init() {
     Configuration.browserSize = "1920x1080";
-    Configuration.baseUrl = "https://demoqa.com";
-    Configuration.pageLoadTimeout = 60000; // очень долго грузиться любой браузер!!!!
+    Configuration.baseUrl = BASE_URL;
+    // для параметра Configuration.pageLoadTimeout не хватает значения по умолчанию (30 сек.),
+    // https://demoqa.com имеет проблемы в загрузке контента страницы (Stalled, CAUTION: request isn't finished yet!) продолжительностью более 26 сек.
+    Configuration.pageLoadTimeout = 60000;
     SelenideLogger.addListener(" Allure", new AllureSelenide());
   }
 }

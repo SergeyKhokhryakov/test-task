@@ -7,6 +7,10 @@ import ru.ostrovcy.qademo.base.TestBase;
 
 public class TaskTest extends TestBase {
 
+  String clickResult = "You have done a dynamic click";
+  String contextClickResult = "You have done a right click";
+  String doubleClickResult = "You have done a double click";
+  String textConfirm = "You selected \nOk";
   String promptText = "Test name";
 
   @Test
@@ -27,11 +31,11 @@ public class TaskTest extends TestBase {
 
     mainPage.openButtonsPage()
             .click()
-            .verifyClickResult("You have done a dynamic click")
+            .verifyClickResult(clickResult)
             .contextClick()
-            .verifyContextClickResult("You have done a right click")
+            .verifyContextClickResult(contextClickResult)
             .doubleClick()
-            .verifyDoubleClickResult("You have done a double click");
+            .verifyDoubleClickResult(doubleClickResult);
 
     mainPage.openAlertsFrameWindowsCategory()
             .openBrowserWindowsPage()
@@ -53,7 +57,7 @@ public class TaskTest extends TestBase {
     mainPage.onAlertsPage()
             .showConfirmBox()
             .confirmModal()
-            .verifyConfirmResult("You selected \nOk");
+            .verifyConfirmResult(textConfirm);
 
     mainPage.onAlertsPage()
             .showPromptBox()

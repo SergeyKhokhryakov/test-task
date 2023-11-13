@@ -34,8 +34,6 @@ public final class MainPage {
   private static volatile MainPage instance;
   private String locatorElements = "//div[text()='Elements']";
   private String locatorAlertsFrameWindows = "//div[text()='Alerts, Frame & Windows']";
-//  private String locatorElements = "Elements";
-//  private String locatorAlertsFrameWindows = "Alerts, Frame & Windows";
   private SelenideElement rubrics = $(".element-list.collapse.show");
   private TextBoxPage textBoxPage = new TextBoxPage();
   private ButtonsPage buttonsPage = new ButtonsPage();
@@ -74,28 +72,24 @@ public final class MainPage {
   @Step("3. Нажать на «Text box»")
   public TextBoxPage openTextBoxPage() {
     open("Text Box");
-    hideBanners();
     return textBoxPage;
   }
 
   @Step("7. Нажать на «Buttons»")
   public ButtonsPage openButtonsPage() {
     open("Buttons");
-    hideBanners();
     return buttonsPage;
   }
 
   @Step("15. Нажать на «Browser Windows»")
   public BrowserWindowsPage openBrowserWindowsPage() {
     open("Browser Windows");
-    hideBanners();
     return browserWindowsPage;
   }
 
   @Step("20. Нажать на «Alerts»")
   public AlertsPage openAlertPage() {
     open("Alerts");
-    hideBanners();
     return alertsPage;
   }
 
@@ -124,14 +118,7 @@ public final class MainPage {
   }
 
   private void scrollTo(String locator) {
-//    $(byText(locator)).scrollTo();
     $(By.xpath(locator)).scrollTo();
-  }
-
-  //hide overlay banners
-  private void hideBanners(){
-    executeJavaScript("$('footer').remove()");
-    executeJavaScript("$('#fixedban').remove()");
   }
 
 }

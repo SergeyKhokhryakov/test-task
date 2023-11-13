@@ -10,8 +10,8 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.switchTo;
 
 public class AlertsPage {
-  long defaultTimeout = 4000;
-  long alertTimeout = 6000;
+  private final static long DEFAULT_TIMEOUT = 4000;
+  private final static long ALERT_TIMEOUT = 6000;
 
   String green = "rgba(40, 167, 69, 1)"; // для chrome
 
@@ -23,7 +23,7 @@ public class AlertsPage {
 
   @Step("22. Закрыть уведомление")
   public void closeModal(){
-    Selenide.switchTo().alert().accept();
+    closeAlert();
   }
 
   @Step("23. Нажать на кнопку «Click me»  рядом с On button click, alert will appear after 5 seconds")
@@ -34,9 +34,9 @@ public class AlertsPage {
 
   @Step("24. Закрыть уведомление")
   public void closeModalTimer(){
-    Configuration.timeout = alertTimeout; // alert will appear after 5 seconds
-    Selenide.switchTo().alert().accept();
-    Configuration.timeout = defaultTimeout; // set default value
+    Configuration.timeout = ALERT_TIMEOUT; // alert will appear after 5 seconds
+    closeAlert();
+    Configuration.timeout = DEFAULT_TIMEOUT; // set default value
   }
 
   @Step("25. Нажать на кнопку «Click me»  рядом с On button click, confirm box will appear")
@@ -47,8 +47,12 @@ public class AlertsPage {
 
   @Step("26. Нажать на кнопку «Да» в уведомление")
   public AlertsPage confirmModal(){
-    Selenide.switchTo().alert().accept();
+    closeAlert();
     return this;
+  }
+
+  private void closeAlert() {
+    Selenide.switchTo().alert().accept();
   }
 
   @Step("27. Проверить, что появился текст You selected Ok")
@@ -75,10 +79,10 @@ public class AlertsPage {
     verifyResult("#promptResult", "You entered \n" + value);
   }
 
-  public void verifyResult(String key, String value){
-    $(key)
+  public void verifyResult(String locator, String textExpected){
+    $(locator)
             .should(appear)
-            .shouldHave(text(value))
+            .shouldHave(text(textExpected))
             .shouldHave(cssValue("color", green));
   }
 

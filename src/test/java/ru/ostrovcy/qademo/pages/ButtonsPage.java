@@ -15,21 +15,15 @@ public class ButtonsPage {
     return this;
   }
 
-  @Step("10. Нажать на кнопку «Right Click me»")
-  public ButtonsPage contextClick(){
-    $("button#rightClickBtn").contextClick();
-    return this;
-  }
-
-  @Step("12. Нажать на кнопку «Double Click me»")
-  public ButtonsPage doubleClick(){
-    $("button#doubleClickBtn").doubleClick();
-    return this;
-  }
-
   @Step("9. Проверить, что появился текст «You have done a dynamic click»")
   public ButtonsPage verifyClickResult(String value) {
     verifyResult("#dynamicClickMessage", value);
+    return this;
+  }
+
+  @Step("10. Нажать на кнопку «Right Click me»")
+  public ButtonsPage contextClick(){
+    $("button#rightClickBtn").contextClick();
     return this;
   }
 
@@ -39,13 +33,19 @@ public class ButtonsPage {
     return this;
   }
 
+  @Step("12. Нажать на кнопку «Double Click me»")
+  public ButtonsPage doubleClick(){
+    $("button#doubleClickBtn").doubleClick();
+    return this;
+  }
+
   @Step("13. Проверить, что появился текст «You have done a double click»")
   public void verifyDoubleClickResult(String value) {
     verifyResult("#doubleClickMessage", value);
   }
 
-  public void verifyResult(String key, String value) {
-    $(key).should(appear).shouldHave(text(value));
+  public void verifyResult(String locator, String textExpected) {
+    $(locator).should(appear).shouldHave(text(textExpected));
   }
 
 }

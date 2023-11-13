@@ -16,6 +16,7 @@ import static com.codeborne.selenide.Selenide.$x;
  * 6. Book Store Application
  *
  * Методы:
+ *   - open()
  *   - goToElementsCategory()
  *   - goToAlertsFrameWindowsCategory()
  *   - по остальным категориям методы дополняются по мере реализации проекта

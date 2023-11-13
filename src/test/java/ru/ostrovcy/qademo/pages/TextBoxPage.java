@@ -55,14 +55,12 @@ public class TextBoxPage {
     verifyResult("permanentAddress", permanentAddress);
   }
 
-  public TextBoxPage verifyResult(String key, String value) {
-    response.$("#" + key).shouldHave(text(value));
-    return this;
+  private void verifyModalAppears() {
+    response.should(appear);
   }
 
-  public TextBoxPage verifyModalAppears() {
-    response.should(appear);
-    return this;
+  private void verifyResult(String key, String value) {
+    response.$("#" + key).shouldHave(text(value));
   }
 
 }
