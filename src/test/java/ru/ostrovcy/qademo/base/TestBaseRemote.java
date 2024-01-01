@@ -3,11 +3,17 @@ package ru.ostrovcy.qademo.base;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import ru.ostrovcy.qademo.helpers.Attach;
 import ru.ostrovcy.qademo.navigation.MainPage;
 import ru.ostrovcy.qademo.navigation.StartPage;
 
-public class TestBase {
+import java.util.Map;
+
+public class TestBaseRemote {
   protected StartPage startPage = new StartPage();
   protected MainPage mainPage = MainPage.getInstance();
   protected TestData data = new TestData();
@@ -20,6 +26,30 @@ public class TestBase {
     // для параметра Configuration.pageLoadTimeout не хватает значения по умолчанию (30 сек.),
     // https://demoqa.com имеет проблемы в загрузке контента страницы (Stalled, CAUTION: request isn't finished yet!) продолжительностью более 26 сек.
     Configuration.pageLoadTimeout = 60000;
+    Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+    Configuration.browser = "chrome";
+//    Configuration.browserVersion = "100.0";
+
+    DesiredCapabilities capabilities = new DesiredCapabilities();
+    capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+            // включить режим "окно-в-окне"
+            "enableVNC", true,
+            // включить режим "запись видео"
+            "enableVideo", true
+    ));
+    Configuration.browserCapabilities = capabilities;
+  }
+
+  @BeforeEach
+  void addListener() {
     SelenideLogger.addListener(" Allure", new AllureSelenide());
+  }
+
+  @AfterEach
+  void addAttachments() {
+    Attach.screenshotAs("Last screenshot");
+    Attach.pageSource();
+    Attach.browserConsoleLogs();
+    Attach.addVideo();
   }
 }

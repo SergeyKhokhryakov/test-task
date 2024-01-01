@@ -3,9 +3,9 @@ package ru.ostrovcy.qademo;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import ru.ostrovcy.qademo.base.TestBase;
+import ru.ostrovcy.qademo.base.TestBaseRemote;
 
-public class TaskTest extends TestBase {
+public class TaskRemoteTest extends TestBaseRemote {
 
   String clickResult = "You have done a dynamic click";
   String contextClickResult = "You have done a right click";
